@@ -12,11 +12,21 @@ DROP TABLE IF EXISTS flights        CASCADE;
 DROP TABLE IF EXISTS passengers     CASCADE;
 
 -- ---------------------------------------------------------------------
--- 1. passengers — no outgoing references
+-- 1. passengers — recursive foreign key references the same table
 -- ---------------------------------------------------------------------
 CREATE TABLE passengers (
     passenger_id   INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    passenger_name VARCHAR(100) NOT NULL
+    passenger_name VARCHAR(100) NOT NULL,
+    referred_by INTEGER,
+
+    CONSTRAINT fk_passengers_referrer
+        FOREIGN KEY (referred_by)
+        REFERENCES passengers (passenger_id)
+        ON DELETE SET NULL,
+
+    CONSTRAINT chk_passengers_no_self_referral
+        CHECK (referred_by IS DISTINCT FROM passenger_id)
+    
 );
 
 -- ---------------------------------------------------------------------
@@ -28,7 +38,13 @@ CREATE TABLE flights (
     departure_time TIMESTAMP   NOT NULL,
     arrival_time   TIMESTAMP   NOT NULL,
     fare           NUMERIC(10,2) NOT NULL,
-    active         BOOLEAN NOT NULL DEFAULT TRUE
+    active         BOOLEAN NOT NULL DEFAULT TRUE,
+
+    CONSTRAINT chk_flights_fare
+    CHECK (fare >= 0),
+
+    CONSTRAINT chk_flights_time
+    CHECK (arrival_time > departure_time)
 );
 
 -- ---------------------------------------------------------------------
@@ -77,5 +93,8 @@ CREATE TABLE bookings (
     CONSTRAINT fk_bookings_flight
         FOREIGN KEY (flight_id)
         REFERENCES flights (flight_id)
-        ON DELETE RESTRICT
+        ON DELETE RESTRICT,
+
+    CONSTRAINT chk_bookings_fare_paid
+        CHECK (fare_paid >= 0)
 );
