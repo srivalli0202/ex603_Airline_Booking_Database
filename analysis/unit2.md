@@ -9,10 +9,13 @@
 | fk_flight_routes_airport | flight_routes | airport_id | airports | airport_id | RESTRICT | Prevents deletion of an airport that is still referenced by any flight route. Protects core reference data. |
 | fk_bookings_passenger | bookings | passenger_id | passengers | passenger_id | CASCADE | If a passenger is deleted, all their bookings must also be deleted. A booking cannot exist without a passenger. |
 | fk_bookings_flight | bookings | flight_id | flights | flight_id | RESTRICT | Prevents deletion of flights that have active bookings. Protects paid customer reservations. |
+| fk_passengers_referrer | passengers | referred_by | passengers | passenger_id | SET NULL | Keeps the passenger record when the referring passenger is deleted. |
+| fk_flight_stops_flight | flight_stops | flight_id | flights | flight_id | CASCADE | Deletes related stops when their flight is deleted. |
+| fk_flight_stops_airport | flight_stops | airport_id | airports | airport_id | RESTRICT | Prevents deleting an airport that is still used by a flight stop. |
 
 Constraint Analysis Write‑Up
 Foreign Key Constraints Overview
-The Airline Booking Database uses four foreign key constraints to maintain referential integrity across its relational structure. These constraints ensure that relationships between passengers, flights, airports, routes, and bookings remain valid and consistent throughout all database operations.
+The Airline Booking Database uses seven foreign key constraints to maintain referential integrity across its relational structure. These constraints ensure that relationships between passengers, flights, airports, routes, and bookings remain valid and consistent throughout all database operations.
 
 1. fk_flight_routes_flight (CASCADE)
 This constraint links each route entry to a specific flight. The CASCADE rule ensures that when a flight is deleted, all associated route mappings are automatically removed. This prevents orphaned route records and maintains the integrity of the flight‑to‑route relationship.
@@ -25,6 +28,15 @@ This constraint ties each booking to a passenger. The CASCADE rule ensures that 
 
 4. fk_bookings_flight (RESTRICT)
 This constraint links each booking to a flight. The RESTRICT rule prevents deletion of any flight that still has active bookings. This protects customer reservations and enforces business rules around flight availability and booking validity.
+
+5. fk_passengers_referrer (SET NULL)
+This constraint connects a passenger to another passenger who referred them. If the referring passenger is deleted, the referred_by value becomes NULL. The passenger's record stays in the database.
+
+6. fk_flight_stops_flight (CASCADE)
+This constraint connects each flight stop to its flight. When a flight is deleted, all its related stops are automatically deleted because those stops cannot exist without the flight.
+
+7. fk_flight_stops_airport (RESTRICT)
+This constraint connects each flight stop to an airport. The RESTRICT rule prevents an airport from being deleted while it is still used by a flight stop. This helps protect important route information.
 
 Justification of ON DELETE Rules
 The chosen ON DELETE behaviors reflect the logical and business requirements of an airline booking system:
