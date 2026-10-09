@@ -38,7 +38,7 @@ This constraint connects each flight stop to its flight. When a flight is delete
 7. fk_flight_stops_airport (RESTRICT)
 This constraint connects each flight stop to an airport. The RESTRICT rule prevents an airport from being deleted while it is still used by a flight stop. This helps protect important route information.
 
-Justification of ON DELETE Rules
+### Justification of ON DELETE Rules
 The chosen ON DELETE behaviors reflect the logical and business requirements of an airline booking system:
 
 CASCADE is applied where dependent records must not outlive their parent (e.g., bookings tied to passengers, routes tied to flights).
@@ -47,18 +47,21 @@ RESTRICT is applied where deletion would violate business rules or compromise es
 
 This combination ensures both data integrity and operational safety.
 
-CHECK Constraint Narrative
-Although explicit SQL CHECK constraints are not defined in the schema, several business rules are enforced through column types, NOT NULL constraints, and application‑level validation:
+### CHECK Constraint Narrative
 
-fare (flights.fare) and fare_paid (bookings.fare_paid) must be positive monetary values.
+In my Airline Booking Database, I added CHECK constraints to prevent invalid data from being stored in the tables.
 
-active (flights.active) ensures consistent representation of flight status.
+1. **Flight fare:** `CHECK (fare >= 0)` prevents negative ticket prices. Without this rule, someone could accidentally enter a negative fare.
 
-booking_time defaults to the current timestamp, guaranteeing valid booking records.
+2. **Flight time:** `CHECK (arrival_time > departure_time)` ensures that a flight's arrival time is later than its departure time. This prevents invalid flight schedules.
 
-arrival_time > departure_time is a business rule enforced at the application layer to ensure valid flight schedules.
+3. **Booking payment:** `CHECK (fare_paid >= 0)` prevents negative payment amounts from being stored in bookings.
 
-These constraints collectively ensure that the data stored in the system remains meaningful and logically consistent.
+4. **Passenger referral:** `CHECK (referred_by IS DISTINCT FROM passenger_id)` prevents passengers from referring themselves. A passenger can still have no referrer.
+
+5. **Flight stop number:** `CHECK (stop_number > 0)` ensures that every flight stop has a positive stop number.
+
+These CHECK constraints help maintain data accuracy and prevent mistakes when inserting or updating records in the database.
 
 Narrative Summary
 The constraint design of the Airline Booking Database balances strict referential integrity with practical business logic. CASCADE rules ensure automatic cleanup of dependent records, while RESTRICT rules safeguard critical data from accidental deletion. Together, these constraints create a robust, normalized schema that supports reliable airline operations, accurate booking management, and consistent route tracking.
