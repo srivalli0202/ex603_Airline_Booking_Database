@@ -11,5 +11,23 @@ The database should be able to answer important questions about the airline book
 
 ## Entity Relationship Diagram 
 The following ERD shows the relationships between the main entities in the Airline Booking Database.
-![Airline Booking Database ERD](schema/erd.png)
+![Airline Booking Database ERD](schema/erd1.png) 
 
+
+## Schema
+
+For Assignment 2, I converted my Airline Booking Database ERD into PostgreSQL tables. The database contains six tables: passengers, flights, airports, bookings, flight_routes, and flight_stops.
+
+I added primary keys and foreign keys to connect the tables and maintain relationships between the data. I also used CHECK constraints to prevent invalid values, such as negative flight fares and incorrect arrival times.
+
+The passengers table includes a recursive foreign key to track passenger referrals. The flights table includes a derived attribute called duration_min, which calculates flight duration from departure and arrival times.
+
+The flight_stops table represents a weak entity because each stop belongs to a specific flight. The flight_routes table resolves the many-to-many relationship between flights and airports.
+
+I tested the SQL schema in PostgreSQL 16 using pgAdmin 4 and verified that all six tables were created successfully.
+
+**Schema SQL file:** [schema.sql](schema/schema.sql)
+
+**Constraint analysis:** [Unit 2 Analysis](analysis/unit2.md)
+
+**ERD:** [Airline Booking ERD](schema/erd1.png)
