@@ -5,6 +5,7 @@
 -- Target  : PostgreSQL 14+
 -- =====================================================================
 
+DROP TABLE IF EXISTS flight_stops   CASCADE:
 DROP TABLE IF EXISTS bookings       CASCADE;
 DROP TABLE IF EXISTS flight_routes  CASCADE;
 DROP TABLE IF EXISTS airports       CASCADE;
@@ -103,3 +104,29 @@ CREATE TABLE bookings (
     CONSTRAINT chk_bookings_fare_paid
         CHECK (fare_paid >= 0)
 );
+
+----------------------------------------------------------------
+-- 6. flight_stops -weak entity owned by flights
+----------------------------------------------------------------
+CREATE TABLE flight_stops (
+    flight_id INTEGER NOT NULL,
+    stop_number INTERGER NOT NULL,
+    airport_id INTEGER NOT NULL,
+
+    CONSTRAINT pk_flight_stops
+        PRIMARY KEY (flight_id, stop_number),
+
+    CONSTRAINT fk_flight_stops_flight
+        FOREIGN KEY (flight_id)
+        REFERENCES flights (flight_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_flight_stops_airport
+        FOREIGN KEY (airport_id)
+        REFERENCES airports (airport_id)
+        ON DELETE RESTRICT,
+
+    CONSTRAINT chk_flight_stops_number
+        CHECK (stop_number > 0)
+);
+    
