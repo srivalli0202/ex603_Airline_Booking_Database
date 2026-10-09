@@ -37,6 +37,11 @@ CREATE TABLE flights (
     flight_number  VARCHAR(20) NOT NULL UNIQUE,
     departure_time TIMESTAMP   NOT NULL,
     arrival_time   TIMESTAMP   NOT NULL,
+
+    duration_minut INTEGER GENERATED ALWAYS AS (
+        (EXTRACT(EPOCH FROM (arrival_time -departure_time)) / 60):: INTEGER
+    ) STORED,
+    
     fare           NUMERIC(10,2) NOT NULL,
     active         BOOLEAN NOT NULL DEFAULT TRUE,
 
