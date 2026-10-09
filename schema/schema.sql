@@ -5,7 +5,7 @@
 -- Target  : PostgreSQL 14+
 -- =====================================================================
 
-DROP TABLE IF EXISTS flight_stops   CASCADE:
+DROP TABLE IF EXISTS flight_stops   CASCADE;
 DROP TABLE IF EXISTS bookings       CASCADE;
 DROP TABLE IF EXISTS flight_routes  CASCADE;
 DROP TABLE IF EXISTS airports       CASCADE;
@@ -110,7 +110,7 @@ CREATE TABLE bookings (
 ----------------------------------------------------------------
 CREATE TABLE flight_stops (
     flight_id INTEGER NOT NULL,
-    stop_number INTERGER NOT NULL,
+    stop_number INTEGER NOT NULL,
     airport_id INTEGER NOT NULL,
 
     CONSTRAINT pk_flight_stops
