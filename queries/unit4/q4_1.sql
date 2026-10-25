@@ -47,3 +47,22 @@ JOIN flights f
     ON b.flight_id = f.flight_id
 GROUP BY f.origin_country, b.flight_id
 ORDER BY f.origin_country, total_bookings DESC;
+
+-- Additional analysis: Calculate failure rates for each flight.
+-- Cancelled and disputed bookings are counted as failures.
+
+SELECT
+    flight_id,
+    COUNT(*) AS total_bookings,
+    COUNT(*) FILTER (
+        WHERE booking_status IN ('cancelled', 'disputed')
+    ) AS failed_bookings,
+    ROUND(
+        100.0 * COUNT(*) FILTER (
+            WHERE booking_status IN ('cancelled', 'disputed')
+        ) / COUNT(*),
+        2
+    ) AS failure_rate
+FROM bookings
+GROUP BY flight_id
+ORDER BY failure_rate DESC;
