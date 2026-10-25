@@ -21,3 +21,29 @@ SELECT
 FROM bookings
 GROUP BY flight_id
 ORDER BY total_bookings DESC;
+
+-- Task 4.1c: Find flights with at least 10 bookings.
+-- Exclude flights with too few bookings.
+
+SELECT
+    flight_id,
+    COUNT(*) AS total_bookings,
+    ROUND(AVG(fare_paid), 2) AS average_fare
+FROM bookings
+GROUP BY flight_id
+HAVING COUNT(*) >= 10
+ORDER BY total_bookings DESC;
+
+-- Task 4.1d: Count bookings by origin country and flight.
+-- Show booking activity across two dimensions.
+
+SELECT
+    f.origin_country,
+    b.flight_id,
+    COUNT(*) AS total_bookings,
+    ROUND(AVG(b.fare_paid), 2) AS average_fare
+FROM bookings b
+JOIN flights f
+    ON b.flight_id = f.flight_id
+GROUP BY f.origin_country, b.flight_id
+ORDER BY f.origin_country, total_bookings DESC;
