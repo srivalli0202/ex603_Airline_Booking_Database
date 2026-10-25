@@ -10,3 +10,14 @@ SELECT
     MAX(fare_paid) AS maximum_fare,
     COUNT(DISTINCT passenger_id) AS unique_passengers
 FROM bookings;
+
+-- Task 4.1b: Count bookings and calculate average fare
+-- for each flight, from most bookings to fewest.
+
+SELECT
+    flight_id,
+    COUNT(*) AS total_bookings,
+    ROUND(AVG(fare_paid), 2) AS average_fare
+FROM bookings
+GROUP BY flight_id
+ORDER BY total_bookings DESC;
