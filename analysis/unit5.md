@@ -20,3 +20,13 @@ Leadership should identify flights with no bookings because it helps them unders
 
 ## Recommended Action
 Based on my findings, I recommend that leadership investigate Flights 14 and 15 because they have no bookings. The team should first check whether these flights are active and available for booking. If the flights are new, leadership could review their launch dates and booking availability. If they are active but still have no bookings, the team could investigate possible booking issues or low customer demand.
+
+## Task 5.3 Part A: CROSS JOIN Analysis
+In my airline database, the flight table 15 rows, and the airports table contains 5 rows. When I used a CROSS JOIN, the result contained 75 rows because 15 multiplied by 5 equals 75. This is called a Cartesian product. A Cartesian product can be useful when we want to generate every possible combination of flights and airports for planning or analysis. However, it can also indicate a query mistake if we accidentally combine tables without the correct join condition. This could create unnecessary rows and produce misleading results.
+
+## Task 5.3 Part B: Execution Plan Analysis
+I used PostgreSQL's EXPLAIN command to examine my three table join between bookings, passengers, and flights. The execution plan showed the PostgreSQL selected a Hash Join and Nested Loop.
+
+The Hash join connects bookings with passengers using passenger_id, PostgreSQL also uses a Nested Loop with an Index Scan to find matching flight records using flight_id. The execution plain memorizes, which helps reuse previous flight lookups. PostgreSQL may have selected these methods because the tables are relatively small and the flights table has a primarykey index. As the database grows, reading and joining more records could require additional processing time.
+
+ 
