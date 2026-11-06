@@ -29,4 +29,8 @@ I used PostgreSQL's EXPLAIN command to examine my three table join between booki
 
 The Hash join connects bookings with passengers using passenger_id, PostgreSQL also uses a Nested Loop with an Index Scan to find matching flight records using flight_id. The execution plain memorizes, which helps reuse previous flight lookups. PostgreSQL may have selected these methods because the tables are relatively small and the flights table has a primarykey index. As the database grows, reading and joining more records could require additional processing time.
 
+ ## Task 5.3 Reflection
+The hash join was used to match bookings with passengers, while the Nested Loop was used to find matching flight records. PostgreSQL also used an Index Scan on flights table, which helps locate matching records efficiently. I learned that PostgreSQL might choose a different join algorithm if the database changes. For example, if the bookings table grows from 200 rows to one million rows, the database may need a different approach to process the data efficiently. Adding or removing index could also affect the execution plan. The number of matching records and how the data is distributed can influence which algorithm performs best.
+
+Understanding execution plans is important because it helps us identify possible performance problems. As the database grows, checking the execution plan can help us decide whether indexes or query improvements are needed. For example, if the flights table becomes much larger and indexed lookups become more expensive, PostgreSQL might choose a Hash join instead of a Nested LOOp.
  
