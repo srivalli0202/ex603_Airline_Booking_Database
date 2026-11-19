@@ -49,6 +49,12 @@ The analytical queries developed in unit 3-6 focus on the airline booking datase
 
 The bookings table is the primary table used for analyzing booking activity, fare trends, cancellation and dispute rates, and monthly and quarterly performance. The flights table provides additional flight information for flight level comparisons and reporting. The original database schema was designed in Units 1 and 2, while the dataset provided in Unit 3 was used for the analytical queries in the later units.
 
+### Unit 3 Dataset and DDL
+
+The analytical queries in Units 3-6 were executed using the instructor provided airline. SQL file from Unit 3, imported into the ex603_data PostgreSQL database. 
+
+This dataset provided the database structure and booking records used for business analysis.
+
 ### Unit 4: From Rows to Insight
 
 In Unit 4, I used SQL aggregation to analyze booking activity and identify booking failures across flights and regions.
