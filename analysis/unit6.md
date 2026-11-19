@@ -49,3 +49,15 @@ However, a long booking gap does not necessarily mean that a flight stopped oper
 ### ROWS vs. RANGE
 
 Rows calculates results based on individual row positions, while RANGE uses the ORDER BY values and treats rows with equal ordering values as peers. I used rows with booked_at and booking_id to ensure that the running total and moving average are calculated in a consistent booking by booking order.
+
+### Task6.3: Build the reporting Patterns
+### Question 1: Top-N Reporting Feature
+
+The top N query could support a high value booking dashboard that displays the three highest booking fares for each flight. This feature would help the airline management team identify high value bookings and understand fare patterns.
+
+In my analysis, the query returned 39 records across 13 flights. For example, flight 1 had three highest booking fares of 29.07, 26.17, and 22.46.
+
+### Question 2: Month-over-Month Booking Changes
+A large month over month change indicates a significant increase or decrease in airline booking activity. In my analysis, March 2023 showed a decrease of 47.62%, with bookings dropping from 21 to 11. May 2023 showed an increase of 54.55%, with bookings rising from 11 to 17.
+
+These changes could be related to seasonal demand, ticket prices, promotional offers, or flight availability. The airline management team should investigate significant decreases and consider adjusting pricing, marketing strategies, or flight schedules. they should also analyze significant increases to understand which strategies may be working effectively.
