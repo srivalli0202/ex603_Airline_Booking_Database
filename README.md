@@ -61,9 +61,9 @@ This dataset provided the database structure and booking records used for busine
 
 | SQL File | Business Question |
 |---|---|
-| [q3_1.sql](queries/unit3/q3_1.sql) | To be updated |
-| [q3_2.sql](queries/unit3/q3_2.sql) | To be updated |
-| [q3_3.sql](queries/unit3/q3_3.sql) | To be updated |
+| [q3_1.sql](queries/unit3/q3_1.sql) | How can flights and bookings be filtered, missing values handled, adjusted fares calculated, and payments categorized? |
+| [q3_2.sql](queries/unit3/q3_2.sql) | How can missing check-in values be handled and SQL filtering and column alias errors be corrected using expressions and CTEs? | |
+| [q3_3.sql](queries/unit3/q3_3.sql) | Which passengers have disputed bookings, and how can subqueries, CTEs, IN, and EXISTS be used to identify and verify the results? |
 
 ### Unit 4: From Rows to Insight
 
