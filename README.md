@@ -51,15 +51,23 @@ The bookings table is the primary table used for analyzing booking activity, far
 
 ### Unit 3 Dataset and DDL
 
-The analytical queries in Units 3-6 were executed using the instructor provided airline. SQL file from Unit 3, imported into the ex603_data PostgreSQL database. 
+The analytical queries in Units 3-6 were executed using the instructor provided airline.sql file from Unit 3, imported into the ex603_data PostgreSQL database. 
 
 This dataset provided the database structure and booking records used for business analysis.
+
+### Query Catalog
+
+### unit 3: Data Exploration 
+
+| SQL File | Business Question |
+|---|---|
+| [q3_1.sql](queries/unit3/q3_1.sql) | To be updated |
+| [q3_2.sql](queries/unit3/q3_2.sql) | To be updated |
+| [q3_3.sql](queries/unit3/q3_3.sql) | To be updated |
 
 ### Unit 4: From Rows to Insight
 
 In Unit 4, I used SQL aggregation to analyze booking activity and identify booking failures across flights and regions.
-
-### Query Catalog
 
 **queries/unit4/q4_1.sql — Basic Aggregation**
 
