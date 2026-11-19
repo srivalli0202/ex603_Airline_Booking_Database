@@ -61,3 +61,8 @@ In my analysis, the query returned 39 records across 13 flights. For example, fl
 A large month over month change indicates a significant increase or decrease in airline booking activity. In my analysis, March 2023 showed a decrease of 47.62%, with bookings dropping from 21 to 11. May 2023 showed an increase of 54.55%, with bookings rising from 11 to 17.
 
 These changes could be related to seasonal demand, ticket prices, promotional offers, or flight availability. The airline management team should investigate significant decreases and consider adjusting pricing, marketing strategies, or flight schedules. they should also analyze significant increases to understand which strategies may be working effectively.
+
+### Reflection
+In this unit, I learned how window functions can be used to answer business questions without losing individuals records. Traditional aggregate functions used with GROUP BY combine multiple rows into a summary, while window functions allow calculations across related rows while preserving individual records.
+
+An important reporting question in my Airline Booking Database is how each individual booking fare compares with the average fare for the same flight. Using GROUP BY alone, I obtained 13 rows representing the average fare for each flight with bookings. However, using AVG () with OVER () and PARTITION BY, I retained all 200 booking records while displaying the average fare for the corresponding flight. This made it easier to compare individual fares with flight averages without using an additional join or subquery. I also learned how ranking functions identify high value bookings, how LAG () and LEAD () comparing consecutive records, and how running totals and moving averages help identify trends over time.
