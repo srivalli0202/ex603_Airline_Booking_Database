@@ -5,16 +5,20 @@ Relational database course project for an airline booking system.
 Airline Booking System
 
 ## Domain
-The Airline Booking System is a platform designed to organize and manage information about passengers, flights, bookings, airports, and flight routes. Passengers can make bookings for available flights, and each booking connects a passenger with a specific flight. The system also keeps information about airports and connects flights to airports through flight routes.
 
-The database should be able to answer important questions about the airline booking process. For example, it should identify which flights a passenger has booked, which passengers are booked on a particular flight, and which airports are associated with a flight. It should also provide flight information such as the flight number, departure time, arrival time, fare, and whether the flight is active. Organizing this information in a relational database helps keep the data accurate, consistent, and easy to retrieve.
+The Airline Booking System is a platform designed to organize and manage information about passengers, flights, bookings, airports, and flight routes. Passengers can make bookings for available flights, and each booking connects a passenger with a specific flight. The system also maintains information about flight schedules, fares, and booking statuses.
 
-## Entity Relationship Diagram 
+The database helps answer important business questions about airline operations, such as which flights receive the most bookings, how booking fares vary across flights, which flights have higher failure rates, and how booking activity changes over time. Cancelled and disputed bookings are analyzed to identify potential problems in the booking process.
+
+This project uses PostgreSQL techniques such as joins, aggregations, common table expressions (CTEs), and window functions to analyze booking activity, identify trends, and generate meaningful business insights. These findings can help airline management monitor booking performance, investigate failures, and make informed business decisions.
+
+## Database Overview
+### Entity Relationship Diagram 
 The following ERD shows the relationships between the main entities in the Airline Booking Database.
 ![Airline Booking Database ERD](schema/erd1.png) 
 
 
-## Schema
+### Database Schema
 
 For Assignment 2, I converted my Airline Booking Database ERD into PostgreSQL tables. The database contains six tables: passengers, flights, airports, bookings, flight_routes, and flight_stops.
 
@@ -32,7 +36,20 @@ I tested the SQL schema in PostgreSQL 16 using pgAdmin 4 and verified that all s
 
 **ERD:** [Airline Booking ERD](schema/erd1.png)
 
-## Unit 4: From Rows to Insight
+The analytical queries developed in unit 3-6 focus on the airline booking dataset provided in Unit 3.
+
+### Tables Relevant to Analytics
+
+| Table | Description |
+|---|---|
+| Passengers | Stores passenger information. |
+| flights | Stores flight details and flight related information. |
+| airports | Stores airport information and locations. |
+| bookings | Stores booking records, booking dates, fares, booking statuses, and cancellation reasons. |
+
+The bookings table is the primary table used for analyzing booking activity, fare trends, cancellation and dispute rates, and monthly and quarterly performance. The flights table provides additional flight information for flight level comparisons and reporting. The original database schema was designed in Units 1 and 2, while the dataset provided in Unit 3 was used for the analytical queries in the later units.
+
+### Unit 4: From Rows to Insight
 
 In Unit 4, I used SQL aggregation to analyze booking activity and identify booking failures across flights and regions.
 
