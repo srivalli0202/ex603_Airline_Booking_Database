@@ -1,4 +1,4 @@
-## Task 5.3 Part A: Count rows in both tables
+-- Task 5.3 Part A: Count rows in both tables
 
 SELECT
     (SELECT COUNT(*) FROM flights) AS total_flights,
