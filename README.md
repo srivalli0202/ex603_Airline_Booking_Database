@@ -186,7 +186,7 @@ Although the analysis identified booking failures, fare changes, and fluctuation
 
 The video presentation provides an overview of the Airline Booking Database project, demonstrates representative SQL queries, discusses important business findings and recommendations, and explains technical challenges and limitations.
 
-Video link: 
+Video link: [https://drive.google.com/file/d/1nLADBBvz-va0mJ8DvPTLO5navrqX-Ptu/view?usp=drive_link]
 
 ## How to Run the Project
 
